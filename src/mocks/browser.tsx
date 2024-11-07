@@ -1,6 +1,11 @@
 import { http, HttpResponse } from "msw";
 import { setupWorker } from "msw/browser";
 import { data } from "../data/data";
+import { ProductType } from "../types/types";
+
+interface SaveRequestBody {
+  data: ProductType[];
+}
 
 export async function isMockServiceEnabled() {
   const worker = setupWorker(
@@ -21,7 +26,7 @@ export async function isMockServiceEnabled() {
 
     // Handler for saving product list
     http.post("/api/save", async ({ request }) => {
-      const { data } = await request.json();
+      const { data } = (await request.json()) as SaveRequestBody;
       localStorage.setItem("savedData", JSON.stringify(data));
       return HttpResponse.json({
         success: true,
@@ -42,24 +47,24 @@ export async function isMockServiceEnabled() {
     }),
 
     // Handler for updating an item
-    http.put("/api/update/:id", async ({ request, params }) => {
-      const updatedItem = await request.json();
-      const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-      const itemIndex = savedData.findIndex(
-        (item: any) => item.id === params.id,
-      );
+    // http.put("/api/update/:id", async ({ request, params }) => {
+    //   const updatedItem = await request.json();
+    //   const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
+    //   const itemIndex = savedData.findIndex(
+    //     (item: any) => item.id === params.id,
+    //   );
 
-      if (itemIndex !== -1) {
-        savedData[itemIndex] = { ...savedData[itemIndex], ...updatedItem };
-        localStorage.setItem("savedData", JSON.stringify(savedData));
-        return HttpResponse.json({
-          success: true,
-          message: "Item updated successfully",
-        });
-      } else {
-        return new Response("Item not found", { status: 404 });
-      }
-    }),
+    //   if (itemIndex !== -1) {
+    //     savedData[itemIndex] = { ...savedData[itemIndex], ...updatedItem };
+    //     localStorage.setItem("savedData", JSON.stringify(savedData));
+    //     return HttpResponse.json({
+    //       success: true,
+    //       message: "Item updated successfully",
+    //     });
+    //   } else {
+    //     return new Response("Item not found", { status: 404 });
+    //   }
+    // }),
 
     // Handler for deleting an item
     http.delete("/api/delete/:id", ({ params }) => {
