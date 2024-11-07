@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { setupWorker } from "msw/browser";
-import { data } from "../data/data";
-import { ProductType } from "../types/types";
+import { data } from "../src/data/data";
+import { ProductType } from "../src/types/types";
 
 interface SaveRequestBody {
   data: ProductType[];
@@ -45,26 +45,6 @@ export async function isMockServiceEnabled() {
         message: "Item added successfully",
       });
     }),
-
-    // Handler for updating an item
-    // http.put("/api/update/:id", async ({ request, params }) => {
-    //   const updatedItem = await request.json();
-    //   const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    //   const itemIndex = savedData.findIndex(
-    //     (item: any) => item.id === params.id,
-    //   );
-
-    //   if (itemIndex !== -1) {
-    //     savedData[itemIndex] = { ...savedData[itemIndex], ...updatedItem };
-    //     localStorage.setItem("savedData", JSON.stringify(savedData));
-    //     return HttpResponse.json({
-    //       success: true,
-    //       message: "Item updated successfully",
-    //     });
-    //   } else {
-    //     return new Response("Item not found", { status: 404 });
-    //   }
-    // }),
 
     // Handler for deleting an item
     http.delete("/api/delete/:id", ({ params }) => {

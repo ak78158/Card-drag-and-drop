@@ -2,7 +2,10 @@ import "./App.css";
 import Home from "./pages/home/home";
 
 if (process.env.NODE_ENV === "development") {
-  const { isMockServiceEnabled } = await import("./mocks/browser");
+  const { isMockServiceEnabled } = await import("../mocks/browser");
+  await isMockServiceEnabled();
+} else {
+  const { isMockServiceEnabled } = await import("../mocks/browser");
   await isMockServiceEnabled();
 }
 
