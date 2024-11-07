@@ -65,7 +65,6 @@ const Home = () => {
       (item) => item.position === hoveredPosition,
     );
 
-    // Create a new array with the reordered items
     const updatedData = [...(productData || [])];
     const [draggedItem] = updatedData.splice(draggedItemIndex, 1);
     updatedData.splice(hoveredItemIndex, 0, draggedItem);
