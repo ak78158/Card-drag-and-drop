@@ -15,25 +15,26 @@ This project allows users to reorder cards using drag-and-drop and view images i
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   Navigate to the project directory:
+   git clone https://github.com/ak78158/Card-drag-and-drop.git
+
    ```
+
+2. Navigate to the project directory:
 
    ```bash
-   cd your-repo
+   cd Card-drag-and-drop
    ```
 
-   Install dependencies:
+3. Install dependencies:
 
-```bash
- npm install
-```
+   ```bash
+    npm install
+   ```
 
-Run the project:
-
-```bash
-npm start
-```
+4. Run the project:
+   ```bash
+   npm start
+   ```
 
 Open your browser and go to http://localhost:5173 to view the app.
 
