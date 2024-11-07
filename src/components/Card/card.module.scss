@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.spinner {
+  width: 200px; /* Adjust as needed */
+  height: 200px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card.dragging {
+  opacity: 0.5;
+}
+
+.card.hovered {
+  border: 2px dashed #007bff;
+  background-color: #f0f8ff;
+}
